@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Signup {% endblock title %}
+
+{% block content %}
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+  </style>
+
+
+<body>
+<!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}  -->
+
+  <h1>Create Account:</h1>
+
+  <span class="mb-0 text-muted">
+    {% if msg %}
+        {{ msg | safe }}
+    {% else %}
+        Login page
+    {% endif %}
+  </span>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <!-- <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+     -->
+
+    <label for="username">Username:</label>
+    <!-- <input type="text" id="username" name="username" required> -->
+    {{ form.username }}
+
+    <label for="email">Email:</label>
+    <!-- <input type="email" id="email" name="email" required> -->
+    {{ form.email}}
+
+    <label for="password">Password:</label>
+    <!-- <input type="password" id="password" name="password" required> -->
+    {{ form.password1 }}
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <!-- <input type="password" id="confirmPassword" name="confirmPassword" required> -->
+    {{ form.password2 }}
+
+    <p>Please select your account type:</p>
+
+    <!-- <input type="radio" id="user" name="user" value="user">User<br>
+    <input type="radio" id="officer" name="user" value="officer">Officer<br> -->
+    <div class="d-flex mb-5 align-items-center">
+      <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
+          {{ form.is_admin }}
+        <!-- <div class="control__indicator"></div> -->
+      </label>
+    <br>
+      <label class="control control--checkbox mb-0"><span class="caption">User</span>
+          {{ form.is_user }}
+        <!-- <div class="control__indicator"></div> -->
+      </label>
+      <br>
+      <label class="control control--checkbox mb-0"><span class="caption">Officer</span>
+          {{ form.is_officer }}
+        <!-- <div class="control__indicator"></div> -->
+      </label>
+    </div>
+      <span class="text-error">{{ form.errors }}</span>
+    
+    <br>
+    <button type="submit">Create</button><br><br>
+    <a href="{% url 'signin' %}">Already have an account?</a>
+  </form><br><br>
+ 
+</body>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+
+    <div class="container mt-5 px-2">
+        
+        <div class="table-responsive">
+            <h2 style="text-align: center;"><strong>Drone Permits</strong></h2>
+            {% if permit_list %}
+                <table class="table table-responsive ">
+                    
+                    <thead>
+                        <tr class="bg-light">
+                            <th scope="col" width="15%">Permit ID</th>
+                            <th scope="col" width="20%">Date Created</th>
+                            <th scope="col" width="10%">Status</th> 
+                            <th scope="col" width="20%">Owner Name</th>
+                            <th scope="col" width="20%">Drone Details</th>
+                            <th scope="col" width="80%">Drone Registration No</th>
+                            <th scope="col" width="20%">Location</th>
+                            <th scope="col" width="60%">Change Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for permit in permit_list %}
+                        <tr>
+                        <td>{{ permit.id }}</td>
+                        <td>{{ permit.date_created }}</td>
+                        <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{ permit.status }}</span>
+                        </td>
+                        
+                        <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> {{ permit.owner.fname }} {{ permit.owner.lname }}</td>
+                        <td>{{ permit.drone.modelno }}, {{ permit.drone.manufacturer }}</td>
+                        <td>{{ permit.drone.reg_id }}</td>
+                        <td>{{ permit.area.municipality }}-{{ permit.area.wardno }}, {{ permit.area.district }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'Main:update_status' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="permit_id" value="{{ permit.id }}">
+                                <select name="status" id="status">
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                                <input type="submit" value="Update">
+                            </form>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No permits found.</p>
+            {% endif %}
+    
+        </div>
+        
+    </div>
+{% endblock %}

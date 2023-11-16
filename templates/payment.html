@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} payment {% endblock title %}
+
+{% block content %}
+
+<style>
+    .center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+</style>
+<h1> This donation is for the Site</h1>
+<marquee scrollamount="20">Please help us to keep the system running with your little help!!</marquee>
+    <!-- <div class="paypal-button-container">
+        <button value="donate">donate</button>
+    </div> -->
+    
+        <div id="paypal-button-container" class="center">
+            <p>Payment conformation for $5 donation:</p>
+        </div>
+<script src="https://www.paypal.com/sdk/js?client-id=AVeT07nK_pAYI3X3QOE5JjH8O-nvOvs1AfeHHZlGs_t6tneZBKX9KJfyO3jzllxXHzv-y-RUxf1dnHYY&currency=USD"></script>
+
+  <script>
+    var total = '5'
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+          style:{
+            color: 'blue',
+            shape: 'pill',
+            size: 'responsive',
+            label: 'paypal',
+          },
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: 50
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    submitFormData()
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+{% endblock %}

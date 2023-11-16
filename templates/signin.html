@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Signin {% endblock title %}
+
+{% block content %}
+
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Login</h1>
+
+  <span class="mb-0 text-muted">
+    {% if msg %}
+        {{ msg | safe }}
+    {% else %}
+        Login page
+    {% endif %}
+  </span>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <!-- <input type="text" id="username" name="username" required> -->
+    {{ form.username }}
+
+
+    <label for="password">Password:</label>
+    <!-- <input type="password" id="password" name="password" required> -->
+    {{ form.password }}
+
+    <br> 
+    <button type="submit">Login</button><br><br>
+    <a href="{% url 'signup' %}">Don't have an account?</a><br>
+    <a href="/admin">Admin Login</a>
+  </form>
+
+  {% endblock content %}

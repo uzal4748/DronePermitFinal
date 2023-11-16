@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h2 style="text-align: center;">Welcome, {{ owner.fname }} {{ owner.lname }}</h2>
+
+    <div class="container mt-5 px-2">
+        <div class="table-responsive">
+            {% if owner.drones.all %}
+            <table class="table table-responsive">
+                <h3 style="text-align: center;">Drone Details</h3>
+                {% for drone in owner.drones.all %}
+               <thead>
+                    <tr class="bg-body-tertiary">
+                        <th>Model No</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Weight</th>
+                        <th>Maximum Takeoff</th>
+                        <th>Drone Registration No</th>
+                        <th>Manufacturer</th>
+                    </tr>
+               </thead> 
+               <tbody>
+                <tr>
+                    <td>{{ drone.modelno }}</td>
+                    <td>{{ drone.get_category_display }}</td>
+                    <td>{{ drone.get_types_display }}</td>
+                    <td>{{ drone.weight }}</td>
+                    <td>{{ drone.max_takeoff }}</td>
+                    <td>{{ drone.reg_id }}</td>
+                    <td>{{ drone.manufacturer }}</td>
+                </tr>
+               </tbody>
+               {% endfor %}
+            </table>
+            {% else %}
+            <p>No drones found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container mt-5 px-2">
+        <div class="table-responsive">
+            {% if owner.drone_permits.all %}
+            <table class="table table-responsive">
+                <h3 style="text-align: center;">Permit Detail</h3>
+                {% for permit in owner.drone_permits.all %}
+                <thead>
+                    <tr class="bg-light">
+                        <th>Location</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ permit.area.municipality }}-{{ permit.area.wardno }}, {{ permit.area.district }}</td>
+                        <td>{{ permit.status }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            {% else %}
+                <p>No permits found.</p>
+                <a href="{% url 'Main:dronepermit' %}">Apply for a Permit</a>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div>
+    <h1>Permit Application Form</h1>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label><h3>Drone Owner Details</h3></label>
+    {{forms.owner_form.as_p}}
+    <label><h3>Drone Details</h3></label>
+    {{forms.drone_form.as_p}}
+    <label><h3>Area Details</h3></label>
+    {{forms.area_form.as_p}}
+
+    {{forms.dronepermit_form.as_p}}
+      <!-- <h3>Drone Owner's details</h3>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <h3>Drone pilot's details</h3>
+      <label for="pfirstName">First Name:</label>
+      <input type="text" id="pfirstName" name="pfirstName" required />
+
+      <label for="plastName">Last Name:</label>
+      <input type="text" id="plastName" name="plastName" required />
+
+      <label for="pemail">Email:</label>
+      <input type="email" id="pemail" name="pemail" required />
+
+      <label for="pphone">Phone Number:</label>
+      <input type="tel" id="pphone" name="pphone" required />
+
+      <h3>Drone Details</h3>
+      <label for="modelNo">Model no.</label>
+      <input type="text" id="modelNo" name="modelNo" required />
+
+      <label for="category">Category</label>
+      <select name="category" id="category" required>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+
+      <label for="maximumTakeoff">Maximum Takeoff in meter</label>
+      <input type="text" id="maximumTakeoff" name="maximumTakeoff" required />
+
+      <label for="typeofAircraft">Type of Aircraft</label>
+      <select name="typeofAircraft" id="typeofAircraft" required>
+        <option value="Multi-Rotor">Multi-Rotor</option>
+        <option value="Fixed-Wing">Fixed-Wing</option>
+        <option value="Single-Rotor">Single-Rotor</option>
+        <option value="Fixed-Wing Hybrid VTOL">Fixed-Wing Hybrid VTOL</option>
+      </select>
+
+      
+      <label for="weight">Weight</label>
+      <input type="number" id="weight" name="weight" required />
+
+      <label for="manufacturer">Manufacturer</label>
+      <input type="text" id="manufacturer" name="manufacturer" required />
+
+
+      <h3>Area to use</h3>
+      <label for="district">District</label>
+      <select id="districtSelect" name="district">
+        
+      </select>
+
+      <label for="muni">Municipality</label>
+      <input type="text" id="muni" name="muni" required />
+      
+      <label for="wardNo">Ward No.</label>
+      <input type="number" id="wardNo" name="wardNo" required />
+
+      <label for="area">Area in square meter</label>
+      <input type="text" id="area" name="area" required />
+
+      <label for="pur">Purpose</label>
+      <input type="text" id="pur" name="pur" required /> -->
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+    <script>
+      var districts = [
+        "Achham", "Arghakhanchi", "Baglung", "Baitadi", "Bajhang", "Bajura", "Banke", "Bara", "Bardiya", "Bhaktapur", "Bhojpur", "Chitwan", "Dadeldhura", "Dailekh", "Dang", "Darchula", "Dhading", "Dhankuta", "Dhanusa", "Dholkha", "Dolpa", "Doti", "Eastern Rukum", "Gorkha", "Gulmi", "Humla", "Ilam", "Jajarkot", "Jhapa", "Jumla", "Kailali", "Kalikot", "Kanchanpur", "Kapilvastu", "Kaski", "Kathmandu", "Kavrepalanchok", "Khotang", "Lalitpur", "Lamjung", "Mahottari", "Makwanpur", "Manang", "Morang", "Mugu", "Mustang", "Myagdi", "Nawalpur", "Nuwakot", "Okhaldhunga", "Palpa", "Panchthar", "Parbat", "Parsa", "Pyuthan", "Ramechhap", "Rasuwa", "Rautahat", "Rolpa", "Rukum", "Rupandehi", "Salyan", "Sankhuwasabha", "Saptari", "Sarlahi", "Sindhuli", "Sindhupalchok", "Siraha", "Solukhumbu", "Sunsari", "Surkhet", "Syangja", "Tanahu", "Taplejung", "Terhathum", "Udayapur", "Western Rukum"
+      ];
+    
+      // Get the select element
+      var selectElement = document.getElementById("districtSelect");
+    
+      // Populate the select element with options
+      for (var i = 0; i < districts.length; i++) {
+        var option = document.createElement("option");
+        option.text = districts[i];
+        option.value = districts[i];
+        selectElement.add(option);
+      }
+    </script>
+    
+{% endblock content %}
